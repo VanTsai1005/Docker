@@ -1,0 +1,21 @@
+FROM python:2.7.13
+
+MAINTAINER egg.tsai@tripleonetech.net
+
+RUN ln -sf /usr/share/zoneinfo/Asia/Taipei  /etc/localtime
+
+Run pip install MySQL-python && \
+	pip install python-Levenshtein && \
+	pip install futures && \
+	pip install multiprocess
+	
+COPY ./userid_ip_matching.py ./userid_ip_matching.py
+COPY ./MySQL_Operate.py ./MySQL_Operate.py
+COPY ./userid_ip_table.txt ./userid_ip_table.txt
+COPY ./userid_table.txt ./userid_table.txt
+COPY ./ip_table.txt ./ip_table.txt
+COPY ./type_table.txt ./type_table.txt
+COPY ./ref_table.txt ./ref_table.txt
+COPY ./device_table.txt ./device_table.txt
+
+CMD ["python", "userid_ip_matching.py"]
